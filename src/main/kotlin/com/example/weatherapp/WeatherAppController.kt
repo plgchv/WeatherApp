@@ -70,13 +70,11 @@ class WeatherAppController {
     fun initialize() {
         logger.info("App started")
 
-        val result = Database.executeQuery(connection, "SELECT * FROM CITY")
-        if (result != null) {
-            val lastCity = Database.getFirstValue(result, "CITYNAME")
-            logger.info("Last city: $lastCity")
-            searchField.text = lastCity
-            displayWeather()
-        }
+        val result = Database.executeQuery(connection, "SELECT * FROM CITY") ?: return
+        val lastCity = Database.getFirstValue(result, "CITYNAME") ?: return
+        logger.info("Last city: $lastCity")
+        searchField.text = lastCity
+        displayWeather()
     }
 
     private fun showAlert(message: String) {

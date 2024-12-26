@@ -41,7 +41,7 @@ object Database {
             logger.info("Successfully connected!")
             connection
         } catch (e: Exception) {
-            e.printStackTrace()
+            logger.error("$e")
             null
         }
     }
@@ -51,6 +51,7 @@ object Database {
         return try {
             statement?.executeQuery(query)
         } catch (e: Exception) {
+            logger.error("$e")
             null
         }
     }
